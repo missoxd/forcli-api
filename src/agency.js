@@ -19,7 +19,7 @@ const agencies = {
         return Agency.findOne({ id }, (err, data) => data)
     },
     
-    getAgencies: function(args) {
+    getAgencies: (args) => {
         return Agency.find()
     },
     
