@@ -10,16 +10,15 @@ const Agency = mongoose.model("Agency", {
 
 const agencies = {
 
-    saveAgency : function (agency) {
-        agencyDb = new Agency(agency);
-        agencyDb.save().then(() => console.log('MIIIIUUUU'))
+    saveAgency: async function (agency) {
+        agencyDb = new Agency(agency)
+        await agencyDb.save()
+        return agencyDb
     },
 
     getAgency: function(args) { 
         var id = args.id;
-        return Agency.find().filter(course => {
-            return course.id == id;
-        })[0];
+        return Agency.findOne({id}, (err, data) => data);
     },
     
     getAgencies: function(args) {

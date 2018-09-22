@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const express_graphql = require('express-graphql')
 const { buildSchema } = require('graphql');
-const { getAgencies, getAgency } = require('./src/agency');
+const agency = require('./src/agency');
 const mongoose = require('mongoose');
 
 const app = express()
@@ -16,6 +16,9 @@ var schema = buildSchema(`
     type Query {
         agency(id: Int!): Agency
         agencies: [Agency]
+    },
+    type Mutation {
+        createAgency(id: Int!, name: String!): Agency
     },
     type Agency {
         id: Int
@@ -39,8 +42,9 @@ var schema = buildSchema(`
 `);
 
 var root = {
-    agency: getAgency,
-    agencies: getAgencies
+    agency: agency.getAgency,
+    agencies: agency.getAgencies,
+    createAgency: agency.saveAgency
 };
 
 app.use('/graphql', express_graphql({

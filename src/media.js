@@ -12,7 +12,6 @@ const schema = {
         comment: String,
         name: String, 
     }]            
-
 }
 
 module.exports = mongoose.model("Media", schema)
