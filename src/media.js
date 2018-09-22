@@ -21,13 +21,12 @@ module.exports = {
         return media
     },
 
-    getMedia: function(args) {
-        var id = args.id;
+    getMedia: ({ id }) => {
         return Media.findOne({id}, (err, data) => data);
     },
     
-    getAgencies: function(args) {
-        return Media.find();
+    getMedias: () => {
+        return Media.find()
     }
 
 }
