@@ -1,17 +1,7 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const express_graphql = require('express-graphql')
-const { buildSchema } = require('graphql');
-const agency = require('./src/agency');
-const comment = require('./src/comment');
-const mongoose = require('mongoose');
+var express = require('express');
+var bodyParser = require('body-parser');
 
 const app = express()
-app.use(bodyParser.json())
-
-
-mongoose.connect('mongodb://localhost:27017/forcli');
-
 
 var schema = buildSchema(`
     type Query {
