@@ -1,35 +1,23 @@
 const mongoose = require("mongoose");
+const Media = require("./media");
 
 const Agency = mongoose.model("Agency", {
     id: Number,
     name: String,
-    medias : [{
-        id: Number,
-        title: String,
-        description: String,
-        url: String,
-        slug: String,
-        comments: [{
-            id: Number,
-            comment: String,
-            name: String, 
-        }]            
-    }]
+    medias : [Media.schema]
 })
-
 
 const agencies = {
 
-    saveAgency : function (agency) {
-        agencyDb = new Agency(agency);
-        agencyDb.save().then(() => console.log('MIIIIUUUU'))
+    saveAgency: async function (agency) {
+        agencyDb = new Agency(agency)
+        await agencyDb.save()
+        return agencyDb
     },
 
     getAgency: function(args) { 
         var id = args.id;
-        return Agency.find().filter(course => {
-            return course.id == id;
-        })[0];
+        return Agency.findOne({id}, (err, data) => data);
     },
     
     getAgencies: function(args) {
