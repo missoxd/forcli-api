@@ -1,9 +1,17 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express')
+const bodyParser = require('body-parser')
+const express_graphql = require('express-graphql')
+const mongoose = require('mongoose')
+const { buildSchema } = require('graphql');
+
+const agencyService = require('./src/services/agency');
 
 const app = express()
+app.use(bodyParser.json())
 
-var schema = buildSchema(`
+mongoose.connect('mongodb://localhost:27017/forcli');
+
+let schema = buildSchema(`
     type Query {
         agency(id: Int!): Agency
         agencies: [Agency]
@@ -38,15 +46,16 @@ var schema = buildSchema(`
 		y: Int
         comments: [Comment]
     }
-`);
+`)
 
 var root = {
-    agency: agency.getAgencyForGraph,
-    agencies: agency.getAgencies,
-	comment: comment.getComment,
-    comments: comment.getComments,
-    createComment: comment.createComment,
-    createAgency: agency.createAgency
+    agency: agencyService.getAgency,
+    agencies: agencyService.getAgencies,
+    createAgency: agencyService.createAgency,
+
+	// comment: comment.getComment,
+    // comments: comment.getComments,
+    // createComment: comment.createComment
 };
 
 app.use('/graphql', express_graphql({
