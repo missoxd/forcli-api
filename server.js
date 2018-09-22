@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const express_graphql = require('express-graphql')
 const { buildSchema } = require('graphql');
 const agency = require('./src/agency');
+const comment = require('./src/comment');
 const mongoose = require('mongoose');
 
 const app = express()
@@ -32,19 +33,31 @@ var schema = buildSchema(`
         url: String
         type: String
         slug: String
-        comments: [Comment]
+		comments: [Comment],
+		pins: [Pin],
     },
     type Comment {
-        id: Int
-        comment: String
+		mediaId: Int
+		pinId: Int
+        comment: String!
         name: String
+	}
+	type Pin {
+        id: Int
+		x: Int,
+		y: Int,
+        comments: [Comment]
     }
 `);
 
 var root = {
     agency: agency.getAgency,
     agencies: agency.getAgencies,
-    createAgency: agency.saveAgency
+	createAgency: agency.saveAgency,
+	
+	comment: comment.getComment,
+    comments: comment.getComments,
+    createComment: comment.createComment,
 };
 
 app.use('/graphql', express_graphql({
