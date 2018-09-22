@@ -1,26 +1,12 @@
 const mongoose = require("mongoose");
+const Media = require("./media");
 
-
-const Media = mongoose.model("Media", {id: Number});
 
 const Agency = mongoose.model("Agency", {
     id: Number,
     name: String,
-    medias : [{
-        id: Number,
-        title: String,
-        description: String,
-        url: String,
-        type: String,
-        slug: String,
-        comments: [{
-            id: Number,
-            comment: String,
-            name: String, 
-        }]            
-    }]
+    medias : [Media.schema]
 })
-
 
 const agencies = {
 
@@ -44,9 +30,16 @@ const agencies = {
 const teste =  {
     id: 1,
     name: 'Arpina ' + new Date(),
-    medias : [{
-        id: 2              
-    }]
+    medias : [
+        {
+            id: 2,
+            comments: [
+                {
+                    id: 1,
+                }
+            ]  
+        }
+    ]
 }
 agencies.saveAgency(teste);
 
