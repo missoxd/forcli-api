@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Media = require("./media");
+const mongoose = require("mongoose")
+const Media = require("./media")
 
 const Agency = mongoose.model("Agency", {
     id: Number,
@@ -9,22 +9,25 @@ const Agency = mongoose.model("Agency", {
 
 const agencies = {
 
-    saveAgency: async function (agency) {
-        agencyDb = new Agency(agency)
-        await agencyDb.save()
-        return agencyDb
+    model: Agency,
+
+    createAgency: async function (agency) {
+        return await new Agency(agency).save()
     },
 
-    getAgency: function(args) { 
-        var id = args.id;
-        return Agency.findOne({id}, (err, data) => data);
+    getAgency: ({ id }) => {
+        return Agency.findOne({ id }, (err, data) => data)
     },
     
     getAgencies: function(args) {
-        return Agency.find();
+        return Agency.find()
     },
-
-    model: Agency,
+    
+    addMediaToAgency: (agencyId, mediaId) => {
+        let agency = getAgency(agencyId)
+        agency.medias.push(mediaId)
+        agency.save()
+    }
 }
 
 module.exports = agencies;

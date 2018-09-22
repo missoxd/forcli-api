@@ -19,6 +19,10 @@ var schema = buildSchema(`
     },
     type Mutation {
         createAgency(id: Int!, name: String!): Agency
+        createMedia(
+            agencyId: Int!, 
+            title: String!,
+        )
     },
     type Agency {
         id: Int
@@ -44,7 +48,7 @@ var schema = buildSchema(`
 var root = {
     agency: agency.getAgency,
     agencies: agency.getAgencies,
-    createAgency: agency.saveAgency
+    createAgency: agency.createAgency
 };
 
 app.use('/graphql', express_graphql({
