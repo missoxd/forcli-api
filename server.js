@@ -3,9 +3,14 @@ const bodyParser = require('body-parser')
 const express_graphql = require('express-graphql')
 const { buildSchema } = require('graphql');
 const { getAgencies, getAgency } = require('./src/agency');
+const mongoose = require('mongoose');
 
 const app = express()
 app.use(bodyParser.json())
+
+
+mongoose.connect('mongodb://localhost:27017/forcli');
+
 
 var schema = buildSchema(`
     type Query {
