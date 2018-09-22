@@ -12,6 +12,10 @@ module.exports = {
 
     getAll : function () {
         return model.find().exec()
+    },
+
+    save : function (model) {
+        return model.save();
     }
 
 }
