@@ -22,11 +22,11 @@ module.exports = {
     },
 
     getMedia: ({ id }) => {
-        return Media.findOne({id}, (err, data) => data);
+        return model.findOne({id}, (err, data) => data);
     },
     
     getMedias: () => {
-        return Media.find()
+        return model.find()
     }
 
 }
