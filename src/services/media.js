@@ -11,7 +11,7 @@ module.exports = {
     getMedias: function ({ agencyId }) {
         return agencyRepository.getById(agencyId).then((agency) => {
             return mediaRepository.getByIds(agency.medias)
-        })        
+        })
     },
 
     createMedia: function (args) {

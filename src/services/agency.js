@@ -4,6 +4,7 @@ module.exports = {
 
     getAgency: function ({ id }) {
         return agencyRepository.getById(id)
+        //.then((a) => console.log(a))
     },
 
     getAgencies: function () {

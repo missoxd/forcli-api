@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const media = require('./media')
 
 module.exports = mongoose.model('Agency', {
     name: String,
-    medias : [media.schema]
+    medias : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Media' }]
 })

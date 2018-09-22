@@ -7,7 +7,7 @@ module.exports = {
     },
 
     getById: function (id) {
-        return model.findById(id).exec()
+        return model.findById(id).populate('medias').exec()
     },
 
     getAll : function () {
