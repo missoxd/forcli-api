@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const express_graphql = require('express-graphql')
 const { buildSchema } = require('graphql');
+const { getAgencies, getAgency } = require('./src/agency');
 
 const app = express()
 app.use(bodyParser.json())
@@ -32,36 +33,10 @@ var schema = buildSchema(`
     }
 `);
 
-var data = [
-    {
-        id: 1,
-        name: 'Arpina',
-        medias: [
-            {
-                id: 1,
-                title: 'teste1',
-                description: 'teste2'
-            }
-        ]
-    }
-]
-
-var getAgency = function(args) { 
-    var id = args.id;
-    return data.filter(course => {
-        return course.id == id;
-    })[0];
-}
-
-var getAgencies = function(args) {
-    return data;
-}
-
 var root = {
     agency: getAgency,
     agencies: getAgencies
 };
-
 
 app.use('/graphql', express_graphql({
     schema: schema,
