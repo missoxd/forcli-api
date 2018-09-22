@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-
-const Media = mongoose.model("Media", {id: Number});
-
 const Agency = mongoose.model("Agency", {
     id: Number,
     name: String,
@@ -11,7 +8,6 @@ const Agency = mongoose.model("Agency", {
         title: String,
         description: String,
         url: String,
-        type: String,
         slug: String,
         comments: [{
             id: Number,
@@ -38,16 +34,9 @@ const agencies = {
     
     getAgencies: function(args) {
         return Agency.find();
-    }
-}
+    },
 
-const teste =  {
-    id: 1,
-    name: 'Arpina ' + new Date(),
-    medias : [{
-        id: 2              
-    }]
+    model: Agency,
 }
-agencies.saveAgency(teste);
 
 module.exports = agencies;
