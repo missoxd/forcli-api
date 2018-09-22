@@ -42,10 +42,12 @@ let schema = buildSchema(`
 		pins: [Pin]
     },
     type Comment {
+        id: String
         comment: String!
         name: String
 	},
 	type Pin {
+        id: String
 		x: Int
 		y: Int
         comments: [Comment]
