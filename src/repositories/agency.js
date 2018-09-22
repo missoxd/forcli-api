@@ -11,7 +11,7 @@ module.exports = {
     },
 
     getAll : function () {
-        return model.getAll();
+        return model.find()
     }
 
 }
