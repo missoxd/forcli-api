@@ -1,6 +1,6 @@
 const agencyRepository = require('../repositories/agency')
 
-let self = module.exports = {
+module.exports = {
 
     getAgency: function ({ id }) {
         return agencyRepository.getById(id)
