@@ -3,7 +3,7 @@ const agencyRepository = require('../repositories/agency')
 module.exports = {
 
     getAgency: function (args) {
-        return this.transform(agencyRepository.create(args))
+        return this.transform(agencyRepository.getById(args.id))
     },
 
     getAgencies: function () {
