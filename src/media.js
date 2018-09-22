@@ -15,7 +15,7 @@ module.exports = {
 
     model,
 
-    createMedia: async function (args) {
+    createMedia: async (args) => {
         let media = await new model(args).save()
         addMediaToAgency(args.agencyId, media._id)
         return media

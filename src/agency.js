@@ -11,7 +11,7 @@ const agencies = {
 
     model: Agency,
 
-    createAgency: async function (agency) {
+    createAgency: async (agency) => {
         return await new Agency(agency).save()
     },
 
