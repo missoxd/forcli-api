@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const { buildSchema } = require('graphql');
 
 const agencyService = require('./src/services/agency');
+const mediaService = require('./src/services/media');
 
 const app = express()
 app.use(bodyParser.json())
@@ -15,6 +16,8 @@ let schema = buildSchema(`
     type Query {
         agency(id: String!): Agency
         agencies: [Agency]
+        media(id: String!): Media
+        medias(agencyId: String!): [Media]
     },
     type Mutation {
         createAgency(name: String!): Agency

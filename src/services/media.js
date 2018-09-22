@@ -10,12 +10,14 @@ let self = module.exports = {
         })
     },
 
-    getMedias: function () {
-        return mediaRepository.getAll().then(function (data) {
-            return _.map(data, function (media) {
-                return self.transform(media)
+    getMedias: function ({ agencyId }) {
+        return agencyRepository.getById(args.agencyId).then((agency) => {
+            return mediaRepository.getByAgencyId(agencyId).then(function (data) {
+                return _.map(data, function (media) {
+                    return self.transform(media)
+                })
             })
-        })
+        })        
     },
 
     createMedia: function (args) {
