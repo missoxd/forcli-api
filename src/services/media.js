@@ -11,8 +11,9 @@ let self = module.exports = {
     },
 
     getMedias: function ({ agencyId }) {
-        return agencyRepository.getById(args.agencyId).then((agency) => {
-            return mediaRepository.getByAgencyId(agencyId).then(function (data) {
+        return agencyRepository.getById(agencyId).then((agency) => {
+            console.log(agency)
+            return mediaRepository.getByIds(agency.medias).then(function (data) {
                 return _.map(data, function (media) {
                     return self.transform(media)
                 })
