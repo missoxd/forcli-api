@@ -1,30 +1,25 @@
 const _ = require('lodash')
 const agencyRepository = require('../repositories/agency')
 
-let service = {
+let self = module.exports = {
 
     getAgency: function (args) {
-        return this.transform(agencyRepository.getById(args.id))
+        return self.transform(agencyRepository.getById(args.id))
     },
 
-    getAgencies: function () {
-        let that = this
-        console.log(this)
-        return _.map(agencyRepository.getAll(), function (agency) {
-             that.transform(agency)
+    getAgencies: async function () {
+        return _.map(await agencyRepository.getAll(), function (agency) {
+            return self.transform(agency)
         })
     },
 
     createAgency: function (args) {
         let agency = agencyRepository.create(args)
-        return this.transform(agency)
+        return self.transform(agency)
     },
 
     transform: function (agency) {
         agency.id = agency._id.toString()
         return agency
     }
-
 }
-
-module.exports = service;

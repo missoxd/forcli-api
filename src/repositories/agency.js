@@ -7,11 +7,11 @@ module.exports = {
     },
 
     getById: function (id){
-        return model.getById(id)
+        return model.findById(id).exec()
     },
 
-    getAll : function () {
-        return model.find()
+    getAll : async function () {
+        return await model.find().exec()
     }
 
 }
