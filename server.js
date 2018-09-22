@@ -19,7 +19,7 @@ let schema = buildSchema(`
     type Mutation {
         createAgency(name: String!): Agency
         createMedia(
-            agencyId: Int!, 
+            agencyId: String!, 
             title: String!
         ): Media
     },
@@ -29,6 +29,7 @@ let schema = buildSchema(`
         medias: [Media]
     },
     type Media {
+        id: String
         title: String
         description: String
         url: String
@@ -52,6 +53,10 @@ var root = {
     agency: agencyService.getAgency,
     agencies: agencyService.getAgencies,
     createAgency: agencyService.createAgency,
+
+    media: mediaService.getMedia,
+    medias: mediaService.getMedias,
+    createMedia: mediaService.createMedia,
 
 	// comment: comment.getComment,
     // comments: comment.getComments,
