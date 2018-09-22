@@ -16,6 +16,10 @@ module.exports = {
 
     save : function (model) {
         return model.save();
+    },
+
+    getByIds: function (ageciesIds) {
+        return model.where("_id").in(ageciesIds).exec()    
     }
 
 }
