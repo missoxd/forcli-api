@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const comment = require('./comment')
 
 module.exports = mongoose.model('Media', {
     title: String,
@@ -7,5 +6,5 @@ module.exports = mongoose.model('Media', {
     url: String,
     type: { type: String },
     slug: String,
-    comments: [comment.schema]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 })
