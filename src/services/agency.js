@@ -3,19 +3,24 @@ const agencyRepository = require('../repositories/agency')
 
 let self = module.exports = {
 
-    getAgency: function (args) {
-        return self.transform(agencyRepository.getById(args.id))
+    getAgency: function ({ id }) {
+        return agencyRepository.getById(id).then((data) => {
+            return self.transform(data) 
+        })
     },
 
-    getAgencies: async function () {
-        return _.map(await agencyRepository.getAll(), function (agency) {
-            return self.transform(agency)
+    getAgencies: function () {
+        return agencyRepository.getAll().then(function (data) {
+            return _.map(data, function (agency) {
+                return self.transform(agency)
+            })
         })
     },
 
     createAgency: function (args) {
-        let agency = agencyRepository.create(args)
-        return self.transform(agency)
+        return agencyRepository.create(args).then((data) => {
+            return self.transform(data)
+        })
     },
 
     transform: function (agency) {

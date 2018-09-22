@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/forcli');
 
 let schema = buildSchema(`
     type Query {
-        agency(id: Int!): Agency
+        agency(id: String!): Agency
         agencies: [Agency]
     },
     type Mutation {

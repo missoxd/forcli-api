@@ -6,12 +6,12 @@ module.exports = {
         return new model(args).save();
     },
 
-    getById: function (id){
+    getById: function (id) {
         return model.findById(id).exec()
     },
 
-    getAll : async function () {
-        return await model.find().exec()
+    getAll : function () {
+        return model.find().exec()
     }
 
 }
