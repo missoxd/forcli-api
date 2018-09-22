@@ -1,4 +1,4 @@
-var model = require('../models/agency');
+var model = require('../models/comment');
 
 module.exports = {
 
@@ -12,10 +12,6 @@ module.exports = {
 
     getAll : function () {
         return model.find().exec()
-    },
-
-    save : function (model) {
-        return model.save();
     }
 
 }
