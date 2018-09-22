@@ -1,13 +1,4 @@
 const mongoose = require("mongoose")
-const { schema: mediaSchema,  } = require("./media")
-
-
-
-const model = mongoose.model("Comment", {
-    comment: String,
-    name: String
-})
-
 
 const comments = {
 

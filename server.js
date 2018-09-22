@@ -19,43 +19,39 @@ var schema = buildSchema(`
         agencies: [Agency]
     },
     type Mutation {
-        createAgency(id: Int!, name: String!): Agency
+        createAgency(name: String!): Agency
         createMedia(
             agencyId: Int!, 
             title: String!
-        )
+        ): Media
     },
     type Agency {
-        id: Int
+        id: String
         name: String
         medias: [Media]
     },
     type Media {
-        id: Int
         title: String
         description: String
         url: String
         type: String
         slug: String
-		comments: [Comment],
-		pins: [Pin],
+		comments: [Comment]
+		pins: [Pin]
     },
     type Comment {
-		mediaId: Int
-		pinId: Int
         comment: String!
         name: String
-	}
+	},
 	type Pin {
-        id: Int
-		x: Int,
-		y: Int,
+		x: Int
+		y: Int
         comments: [Comment]
     }
 `);
 
 var root = {
-    agency: agency.getAgency,
+    agency: agency.getAgencyForGraph,
     agencies: agency.getAgencies,
 	comment: comment.getComment,
     comments: comment.getComments,

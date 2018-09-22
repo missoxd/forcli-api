@@ -1,16 +1,8 @@
 const md5 = require('md5')
 const mongoose = require("mongoose")
 const { addMediaToAgency } = require('./agency')
-const { schema: commentSchema } = require('./comment')
+const Comment = require('./comment')
 
-const model = mongoose.model("Media", {
-    title: String,
-    description: String,
-    url: String,
-    type: { type: String },
-    slug: String,
-    comments: [commentSchema]
-})
 
 module.exports = {
 

@@ -1,33 +1,47 @@
 const mongoose = require("mongoose")
 const Media = require("./media")
 
-const Agency = mongoose.model("Agency", {
-    id: Number,
-    name: String,
-    medias : [Media.schema]
-})
+const agencies = {}
 
-const agencies = {
+agencies.model = Agency
 
-    model: Agency,
-
-    createAgency: async (agency) => {
-        return await new Agency(agency).save()
-    },
-
-    getAgency: ({ id }) => {
-        return Agency.findOne({ id }, (err, data) => data)
-    },
-    
-    getAgencies: (args) => {
-        return Agency.find()
-    },
-    
-    addMediaToAgency: (agencyId, mediaId) => {
-        let agency = getAgency(agencyId)
-        agency.medias.push(mediaId)
-        agency.save()
-    }
+agencies.getAgency = async ({ _id }) => {
+    return await Agency.findById(_id)
 }
 
-module.exports = agencies;
+agencies.getAgencyForGraph = async function (args) {
+    let agency = await this.getAgency(args)
+    agency.id = agency._id.toString()
+    return agency
+}
+
+agencies.createAgency = async (args) => {
+    let agency = await new Agency(args).save()
+    return await agencies.getAgencyForGraph(agency)
+}
+    
+agencies.getAgencies = (args) => {
+    return Agency.find()
+}
+    
+agencies.addMediaToAgency = (agencyId, mediaId) => {
+    let agency = agencies.getAgency(agencyId)
+    agency.medias.push(mediaId)
+    agency.save()
+}
+
+module.exports = agencies
+
+
+/*
+
+Repository:
+create
+getById
+getAll
+addMedia
+
+Services:
+
+
+*/
