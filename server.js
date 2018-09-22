@@ -21,12 +21,12 @@ var schema = buildSchema(`
         createAgency(id: Int!, name: String!): Agency
         createMedia(
             agencyId: Int!, 
-            title: String!,
+            title: String!
         )
     },
     type Agency {
         id: Int
-        name: String,
+        name: String
         medias: [Media]
     },
     type Media {
