@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { schema: mediaSchema } = require("./media")
+const { schema: mediaSchema,  } = require("./media")
 
 
 
@@ -13,7 +13,7 @@ const comments = {
 
     createComment: async function (args) {
         let comment = await new model(args).save()
-        
+
         return comment;
     },
 
