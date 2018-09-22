@@ -1,14 +1,17 @@
+const _ = require('lodash')
 const agencyRepository = require('../repositories/agency')
 
-module.exports = {
+let service = {
 
     getAgency: function (args) {
         return this.transform(agencyRepository.getById(args.id))
     },
 
     getAgencies: function () {
-        return agencyRepository.getAll().map((agency) => {
-            this.transform(agency)
+        let that = this
+        console.log(this)
+        return _.map(agencyRepository.getAll(), function (agency) {
+             that.transform(agency)
         })
     },
 
@@ -23,3 +26,5 @@ module.exports = {
     }
 
 }
+
+module.exports = service;
